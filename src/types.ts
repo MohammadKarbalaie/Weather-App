@@ -43,3 +43,46 @@ export interface IWheather {
     name: string;
     cod: number;
 }
+
+export interface IWheatherUIProps extends IWheather {
+    city: string;
+    setCity: React.Dispatch<React.SetStateAction<string>>;
+    windSpeed: number;
+    temperature: number;
+    humidity: number;
+    visibility: number;
+    weatherIcon: string;
+    population: number;
+    capital: string;
+    region: string;
+    languages: string;
+    timezones: string;
+    callingCode: string;
+    name: string; // نام کامل کشور
+    coordinates: { lat: number; lon: number };
+}
+
+export interface Country {
+    cca2: string;
+    capital: string[];
+    population: number;
+    region: string;
+    languages: { [key: string]: string };
+    timezones: string[];
+    idd: {
+        root: string;
+        suffixes: string[];
+    };
+    translations: {
+        per: {
+            official: string;
+        };
+    };
+    name: {
+        nativeName: {
+            fas: {
+                official: string;
+            };
+        };
+    };
+}

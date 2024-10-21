@@ -4,31 +4,8 @@ import { IWheatherUI } from "../components/UI";
 import { IWheather } from "../types";
 import useDebounce from "../Hooks/useDebounce";
 import "leaflet/dist/leaflet.css";
+import {Country} from '../types'
 
-interface Country {
-    cca2: string;
-    capital: string[];
-    population: number;
-    region: string;
-    languages: { [key: string]: string };
-    timezones: string[];
-    idd: {
-        root: string;
-        suffixes: string[];
-    };
-    translations: {
-        per: {
-            official: string;
-        };
-    };
-    name: {
-        nativeName: {
-            fas: {
-                official: string;
-            };
-        };
-    };
-}
 
 const WeatherApp: React.FC = () => {
     const [weatherData, setWeatherData] = useState<IWheather | null>(null);
