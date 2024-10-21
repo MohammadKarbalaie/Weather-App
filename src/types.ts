@@ -58,9 +58,11 @@ export interface IWheatherUIProps extends IWheather {
     languages: string;
     timezones: string;
     callingCode: string;
-    name: string; // نام کامل کشور
+    name: string;   
     coordinates: { lat: number; lon: number };
+    onMapClick: (lat: number, lon: number) => Promise<void>; 
 }
+
 
 export interface Country {
     cca2: string;

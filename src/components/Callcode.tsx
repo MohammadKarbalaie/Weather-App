@@ -16,17 +16,3 @@ export const Callcode: React.FC<callcode> = ({
         </div>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

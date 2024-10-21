@@ -1,10 +1,10 @@
 import React from "react";
 import { IWheatherUIProps } from "../types";
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import { Flag } from "./FlagCountry";
 import { Callcode } from "./Callcode";
 import { Weatherbox } from "./Weatherbox";
 import { CountryInfo } from "./Countryinfo";
+import { Map } from "./Showmap";
 
 export const IWheatherUI: React.FC<IWheatherUIProps> = ({
     sys: { country },
@@ -23,6 +23,7 @@ export const IWheatherUI: React.FC<IWheatherUIProps> = ({
     callingCode,
     coordinates,
     name,
+    onMapClick,
 }) => {
     return (
         <div className="flex flex-col gap-2">
@@ -45,16 +46,8 @@ export const IWheatherUI: React.FC<IWheatherUIProps> = ({
             </div>
 
             <div className="flex gap-6">
-                    <Weatherbox windSpeed={windSpeed} temperature={temperature} humidity={humidity} visibility={visibility} weatherIcon={weatherIcon}/>
-                <div className="w-4/6 border" id="map">
-                    <MapContainer center={[coordinates.lat, coordinates.lon]} zoom={7} style={{ height: "400px", width: "100%" }}>
-                        <TileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
-                        />
-                        <Marker position={[coordinates.lat, coordinates.lon]} />
-                    </MapContainer>
-                </div>
+             <Weatherbox windSpeed={windSpeed} temperature={temperature} humidity={humidity} visibility={visibility} weatherIcon={weatherIcon}/>
+            <Map coordinates={coordinates} onMapClick={onMapClick}/>      
             </div>
         </div>
     );

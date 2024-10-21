@@ -4,8 +4,7 @@ import { IWheatherUI } from "../components/UI";
 import { IWheather } from "../types";
 import useDebounce from "../Hooks/useDebounce";
 import "leaflet/dist/leaflet.css";
-import {Country} from '../types'
-
+import { Country } from '../types';
 
 const WeatherApp: React.FC = () => {
     const [weatherData, setWeatherData] = useState<IWheather | null>(null);
@@ -18,7 +17,7 @@ const WeatherApp: React.FC = () => {
         languages: string;
         timezones: string;
         callingCode: string;
-        countryName: string; // نام کامل کشور
+        countryName: string; 
     } | null>(null);
     const [error, setError] = useState<string | null>(null);
 
@@ -64,6 +63,16 @@ const WeatherApp: React.FC = () => {
         }
     }, [debouncedCity, fetchWeatherData]);
 
+    const handleMapClick = async (lat: number, lon: number) => {
+        const getCityNameFromCoordinates = async (lat: number, lon: number): Promise<string> => {
+            const apiKey = '6640f904052d9b03f1efd12fce643e70';
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=fa`);
+            return response.data.name;  
+        };
+        const cityName = await getCityNameFromCoordinates(lat, lon);
+        setCity(cityName); 
+    };
+
     return (
         <div>
             {error && <p className="text-red-500">{error}</p>}
@@ -84,7 +93,8 @@ const WeatherApp: React.FC = () => {
                     languages={countryInfo.languages}
                     timezones={countryInfo.timezones}
                     callingCode={countryInfo.callingCode}
-                    name={countryInfo.countryName} // نام کشور
+                    name={countryInfo.countryName}
+                    onMapClick={handleMapClick} 
                 />
             )}
         </div>
