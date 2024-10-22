@@ -19,6 +19,8 @@ const WeatherApp: React.FC = () => {
         callingCode: string;
         countryName: string; 
     } | null>(null);
+
+    
     const [error, setError] = useState<string | null>(null);
 
     const debouncedCity = useDebounce(city, 300);

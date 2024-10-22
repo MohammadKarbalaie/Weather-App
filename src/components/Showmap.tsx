@@ -1,4 +1,5 @@
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
+import { useEffect } from 'react';
 
 interface ICoord {
     coordinates: { lat: number; lon: number };
@@ -8,7 +9,7 @@ interface ICoord {
 export const Map: React.FC<ICoord> = ({
     coordinates,
     onMapClick,
-})=> {
+}) => {
    const MapClickHandler = () => {
       useMapEvents({
          click: (event) => {
@@ -16,6 +17,16 @@ export const Map: React.FC<ICoord> = ({
             onMapClick(lat, lng);
          },
       });
+      return null;
+   };
+
+   const MapUpdater = ({ coordinates }: { coordinates: { lat: number, lon: number } }) => {
+      const map = useMap();
+      useEffect(() => {
+         if (map) {
+            map.setView([coordinates.lat, coordinates.lon], 10); 
+         }
+      }, [coordinates, map]);
       return null;
    };
 
@@ -27,8 +38,9 @@ export const Map: React.FC<ICoord> = ({
                attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
             />
             <Marker position={[coordinates.lat, coordinates.lon]} />
+            <MapUpdater coordinates={coordinates} />
             <MapClickHandler />
          </MapContainer>
       </div>
    );
-}
+};

@@ -40,14 +40,31 @@ export const IWheatherUI: React.FC<IWheatherUIProps> = ({
                 />
             </div>
             <div className="grid grid-cols-3 gap-4">
-                <CountryInfo city={city} name={name} population={population} capital={capital} region={region} languages={languages} timezones={timezones}/>
+                <CountryInfo 
+                    city={city} 
+                    name={name} 
+                    population={population} 
+                    capital={capital} 
+                    region={region} 
+                    languages={languages} 
+                    timezones={timezones}
+                />
                <Callcode callingCode={callingCode}/>
                <Flag country={country}/>
             </div>
 
             <div className="flex gap-6">
-             <Weatherbox windSpeed={windSpeed} temperature={temperature} humidity={humidity} visibility={visibility} weatherIcon={weatherIcon}/>
-            <Map coordinates={coordinates} onMapClick={onMapClick}/>      
+                <Weatherbox 
+                    windSpeed={windSpeed} 
+                    temperature={temperature} 
+                    humidity={humidity} 
+                    visibility={visibility} 
+                    weatherIcon={weatherIcon}
+                />
+                <Map 
+                    coordinates={coordinates} 
+                    onMapClick={onMapClick} 
+                />      
             </div>
         </div>
     );
